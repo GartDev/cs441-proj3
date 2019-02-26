@@ -1,12 +1,16 @@
 package com.example.proj3;
 
 import android.content.Context;
-import android.support.annotation.MainThread;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
+    private CharacterSprite jonny;
 
     public GameView(Context context) {
         super(context);
@@ -23,8 +27,16 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceCreated(SurfaceHolder holder) {
         thread.setRunning(true);
         thread.start();
+        jonny = new CharacterSprite(BitmapFactory.decodeResource(getResources(),R.drawable.jonnyblue));
     }
-
+    @Override
+    public void draw(Canvas canvas){
+        super.draw(canvas);
+        if(canvas != null){
+            canvas.drawColor(Color.WHITE);
+            jonny.draw(canvas);
+        }
+    }
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         boolean retry = true;
