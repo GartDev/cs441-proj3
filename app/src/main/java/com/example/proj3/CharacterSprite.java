@@ -5,18 +5,17 @@ import android.graphics.Canvas;
 
 public class CharacterSprite {
     private Bitmap image;
-    public int x,y,xright,ytop;
-    public CharacterSprite(Bitmap bmp){
-        image = bmp;
-        x = 100;
-        y = 100;
-    }
+    private int x,y,xright,ybot,xcent,ycent;
+
     public CharacterSprite(Bitmap bmp,int xloc, int yloc, int xsize, int ysize){
         image = bmp;
         x = xloc;
         y = yloc;
         xright = xloc + xsize;
-        ytop = yloc - ysize;
+        ybot = yloc + ysize;
+        xcent = xloc + (xsize/2);
+        ycent = yloc + (ysize/2);
+
 
     }
 
@@ -27,5 +26,23 @@ public class CharacterSprite {
     public void update(int xvel,int yvel){
         y += yvel;
         x += xvel;
+    }
+    public int getX(){
+        return x;
+    }
+    public int getY(){
+        return y;
+    }
+    public int getXcent(){
+        return xcent;
+    }
+    public int getYcent(){
+        return ycent;
+    }
+    public int getXright(){
+        return xright;
+    }
+    public int getYbot(){
+        return ybot;
     }
 }

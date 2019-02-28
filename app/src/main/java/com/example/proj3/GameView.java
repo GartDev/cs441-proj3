@@ -37,7 +37,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         thread.start();
         jonny = new CharacterSprite(BitmapFactory.decodeResource(getResources(),R.drawable.jonnyblue),((screenWidth/2)-50),(screenHeight-100),100,100);
         goal = new CharacterSprite(BitmapFactory.decodeResource(getResources(),R.drawable.goal),((screenWidth/2)-100),screenHeight/8,200,75);
-        ball = new CharacterSprite(BitmapFactory.decodeResource(getResources(),R.drawable.ball),((screenWidth/2)-25),screenHeight/2,50,50);
+        ball = new CharacterSprite(BitmapFactory.decodeResource(getResources(),R.drawable.ball),(screenWidth/2)-25,screenHeight/2,50,50);
         garbage = new CharacterSprite(BitmapFactory.decodeResource(getResources(),R.drawable.garbage),((screenWidth/4)-32),screenHeight/2,75,75);
 
     }
@@ -66,11 +66,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
     public void update(){
-        jonny.update(5,-5);
-        if(((jonny.x >= ball.x)&&(jonny.x <= ball.xright))||((jonny.xright >= ball.x)&&(jonny.xright <= ball.xright))){
-            if(((jonny.y >= ball.ytop)&&(jonny.y <= ball.y))||((jonny.ytop >= ball.ytop)&&(jonny.ytop <= ball.y))){
-
-            }
+        jonny.update(0,-1);
+        int xdelt = 0;
+        int ydelt = -3;
+        if((jonny.getXcent() >= ball.getX())&&(jonny.getXcent()<= ball.getXright())&&(jonny.getYcent() <= ball.getYbot())&&(jonny.getYcent() >= ball.getY())){
+                xdelt = ball.getXcent() - jonny.getXcent();
+                ydelt = ball.getYcent() - jonny.getYcent();
         }
+        ball.update(xdelt,ydelt);
     }
 }
